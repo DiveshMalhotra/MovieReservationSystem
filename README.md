@@ -1,2 +1,0 @@
-# MovieReservationSystem
-Movie reservation system
