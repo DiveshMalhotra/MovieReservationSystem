@@ -1,0 +1,8 @@
+<ngb-rating [(rate)]="currentRate" [readonly]="true" [max]="5" (rateChange)="updateRating($event)">
+    <ng-template let-fill="fill" let-index="index">
+        <span class="star" [class.filled]="fill === 100">&#9733;</span>
+    </ng-template>
+</ngb-rating>
+
+<hr>
+<pre>Rating: <b>{{ currentRate }}</b></pre>

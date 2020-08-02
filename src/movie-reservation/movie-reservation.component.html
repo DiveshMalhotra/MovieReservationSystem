@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-sm-3">
+            <h2 (click)="navigateHome()" class="cursor-pointer">Book Movies</h2>
+        </div>
+        <div class="col-sm-5 mb-4" *ngIf="!searchString">
+            <input id="search-movie" type="text" class="form-control" [placeholder]="'Search-Movies'"
+                (input)="setSearchString($event.target.value)" value="{{searchString}}" />
+            <div class="search-template" *ngIf="searchedMovies.length > 0">
+                <p class="cursor-pointer mt-1" (click)="searchedMovie(movies)" *ngFor="let movies of searchedMovies">
+                    {{ movies }}
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-4" *ngIf="!searchString">
+            <span class="align-right">
+                <app-dropdown (click)="openDropdown()" [items]="locationOptions" [placeholder]="'Location'">
+                </app-dropdown>
+                <button class="btn btn-primary" type="button" (click)='login()'>Log in</button>
+            </span>
+        </div>
+    </div>
+    <p class="mt-4">
+        <app-carousel *ngIf="!searchString" [images]="movieTemplate" (movieTitle)="carouselMovie($event)"></app-carousel>
+    </p>
+    <ng-container *ngIf="!searchString">
+        <div class="row mb-3" *ngFor="let dummy of ' '.repeat(5).split('')">
+            <div class="col-3" *ngFor="let movie of movieTemplate" (click)="selectedMovie(movie)">
+                <div class="picsum-img-wrapper">
+                    <img [src]="movie.image" alt="Random {{ idx+1 }} slide">
+                </div>
+                <div class="carousel-caption">
+                    <h3>{{movie.title | uppercase}}</h3>
+                    <p>{{movie.genre | uppercase}}</p>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <p class="mt-4">
+        <app-carousel *ngIf="searchString && !bookTicket" [images]="selectedTitle" (movieTitle)="carouselMovie($event)"></app-carousel>
+        <app-star-rating *ngIf="searchString && !bookTicket" [currentRate]="currentRating"></app-star-rating>
+    </p>
+    <div class="col-sm-12 mt-4">
+        <app-selected-movie *ngIf="bookTicket && !amount" [selectedMovie]="searchString" (totalAmount)="paymentAmount($event)"></app-selected-movie>
+        <app-payment-page *ngIf="amount" [amount]="amount"></app-payment-page>
+    </div>
+    <button *ngIf="searchString && !bookTicket && !amount" class="btn btn-primary align-right mb-4" type="button" (click)='bookTickets()'>Book Tickets</button>
+    <router-outlet></router-outlet>
+</div>

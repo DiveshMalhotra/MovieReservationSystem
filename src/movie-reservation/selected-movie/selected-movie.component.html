@@ -1,0 +1,11 @@
+<div class="col-12">
+    <h3>{{ selectedMovie | uppercase }}</h3>
+    <div class="row mb-4" *ngFor="let timings of showTimings">
+        <div class="col-sm-3 py-2">{{ timings.theatre | uppercase }}</div>
+        <div class="col-sm-9">
+            <div class="col-sm-1 timings cursor-pointer mr-4" [ngClass]="{ 'mb-3':!last }"
+                (click)="selectedTiming(time)"
+                *ngFor="let time of timings.timings; let last = last">{{ time }}</div>
+        </div>
+    </div>
+</div>

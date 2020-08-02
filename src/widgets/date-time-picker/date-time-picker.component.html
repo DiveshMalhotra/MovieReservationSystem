@@ -1,0 +1,12 @@
+<div class="row" id="date-time-picker" aria-label="date-time-picker">
+    <div class="col-9 pr-0">
+        <input id="date-time-picker-{{ dateTimePickerId }}" aria-label="date-time-picker" ngbDatepicker
+            placement="bottom-left" #datepicker="ngbDatepicker" name="date-time-picker" [maxDate]="maxAllowedDate"
+            placeHolder="Select Date" value="{{dateValue}}" class="form-control" (dateSelect)="handleDateChange($event)" />
+    </div>
+    <div class="col-3 pl-0">
+        <button id="toggle-date-picker_{{ dateTimePickerId }}"
+            class="cursor-pointer far fa-calendar-alt search-template calendar"
+            type="button" [disabled]="disabled" (click)="datepicker.toggle(); markAsTouched()"></button>
+    </div>
+</div>

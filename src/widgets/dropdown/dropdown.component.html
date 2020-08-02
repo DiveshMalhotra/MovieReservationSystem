@@ -1,0 +1,41 @@
+<div class="dropdown-cmp">
+    <div
+        id="{{ dropdownId }}"
+        aria-label="dropdown"
+        #dropDrown="ngbDropdown"
+        ngbDropdown
+        placement="bottom-right"
+        class="col-12 d-inline-block"
+        (openChange)="toggled($event)"
+        [autoClose]="true"
+    >
+        <button
+            id="{{ dropdownId }}-{{ currentValue }}-selectData"
+            class="cursor-pointer btn btn-primary"
+            [disabled]="disabled"
+            (click)="onTouchedCallback(true)"
+            ngbDropdownToggle
+        >
+            {{ currentValue || placeholder }}
+        </button>
+        <div
+            ngbDropdownMenu
+            aria-labelledby="dropdown"
+            class="dropdown-menu show"
+            *ngIf="isOpen"
+        >
+            <button
+                tabindex="0"
+                id="{{ item?.value || item }}-{{ idx }}"
+                ngbDropdownItem
+                *ngFor="let item of items; let idx = index; trackBy: trackByFn"
+                (keydown.enter)="select(item, idx)"
+                class="icon-12"
+                (click)="select(item, idx)"
+                [ngClass]="{ 'text-ellipsis': displayHorizontal }"
+            >
+                {{ item?.value || item }}
+            </button>
+        </div>
+    </div>
+</div>

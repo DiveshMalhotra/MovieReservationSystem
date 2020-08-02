@@ -1,0 +1,11 @@
+<h1>Movie Reservation System</h1>
+<p>You are logged in as {{username}}.</p>
+<p>
+    <button (click)='login()'>Log in</button>
+    <button (click)='logout()'>Log out</button>
+    <button (click)='refresh()'>Refresh</button>
+</p>
+<p>Access Token</p>
+<pre>{{token | json}}</pre>
+<p>Claims</p>
+<pre>{{claims | json}}</pre>

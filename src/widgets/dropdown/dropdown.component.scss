@@ -1,0 +1,48 @@
+.dropdown-cmp {
+
+    display: inline-block;
+    
+    .text-align {
+        text-align: inherit;
+        border-radius: 0;
+    }
+
+    .dropdown-menu.show {
+        min-width: inherit;
+        position: absolute;
+        margin-top: 0;
+        border-radius: 0;
+        transform: translate(15px, 38px) !important;
+    }
+
+    .dropdown-item {
+        display: block;
+        width: 100%;
+        padding: 0.25rem 1.5rem;
+        clear: both;
+        color: blue;
+        text-align: inherit;
+        white-space: nowrap;
+        background-color: transparent;
+        border: 0;
+        font-family: inherit;
+        font-size: inherit;
+        padding-left: 14px;
+        cursor: pointer;
+
+        &:focus {
+            outline: auto;
+            outline-color: gray;
+        }
+    }
+
+    .form-control:focus {
+        border-color: gray;
+        box-shadow: none;
+        outline: none;
+    }
+
+    .disabled {
+        background-color: gray;
+    }
+}

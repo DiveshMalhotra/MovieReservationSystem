@@ -1,0 +1,42 @@
+<div class="modal-header border-bottom-0">
+    <div class="col-2">
+        <img id="logo-placeholder" class="img-logo" [src]="''" alt="FPO Image" />
+    </div>
+    <button type="button" class="close" aria-label="Close" tabindex="-1">
+        <span aria-hidden="true" tabindex="0" (click)="activeModal.dismiss()">
+            &times;
+        </span>
+    </button>
+</div>
+<div class="row m-4">
+    <div class="col-3">
+        <app-date-time-picker
+            (dateTime)="dateSelected($event)"
+        ></app-date-time-picker>
+    </div>
+    <div class="col-3 p-0">
+        <span class="align-right py-2 p-0">Show Timing: {{ showTiming }}</span>
+    </div>
+    <div class="col-3 p-0">
+        <span class="align-right py-2">Cost Per Ticket: ₹200</span>
+    </div>
+    <div class="col-3">
+        <span class="align-right py-2">Number Of Seats: {{ noOfSelectedSeats || 0 }}</span>
+    </div>
+</div>
+<div class="col-12" *ngIf="selectedDate">
+    <p *ngFor="let rows of noOfCornerRowSeats">
+        <span class="mr-4">{{ rows.row | uppercase }}</span>
+        <span *ngFor="let seats of rows.seats" class="ml-1" [ngClass]="{ 'mr-5' : seats.middleArea }">
+            <i class="fas fa-couch {{ seats.seatStatus }}" [ngClass]="seats.seatSelected ? getSeatsStatus(seats.seatNumber) : ''"
+            (click)="getSeatsStatus(seats.seatNumber)" (mouseup)="getSelectedSeats()" ngbTooltip="{{ seats.seatNumber | uppercase }}"></i>
+        </span>
+    </p>
+</div>
+<div class="col-12" *ngIf="totalAmount">
+    <hr>
+    <button *ngIf="totalAmount" class="btn btn-primary align-right mb-4" type="button" (click)='proceedPayment()'>Proceed To Payment</button>
+    <span class="align-right py-2 mr-4">
+        ₹ {{ totalAmount }}
+    </span>
+</div>

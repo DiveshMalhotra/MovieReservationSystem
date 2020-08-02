@@ -1,0 +1,41 @@
+<div class="align-center bg-dark">
+    <ngb-carousel *ngIf="images">
+        <ng-container *ngFor="let movieImage of images; let idx = index">
+            <ng-container *ngIf="images.length > 1; else selectedTitle">
+                <ng-template ngbSlide>
+                    <div class="picsum-img-wrapper" (click)="gotoTitle(movieImage)">
+                        <img [src]="movieImage.imageLarge" alt="Random {{ idx+1 }} slide">
+                    </div>
+                    <div class="carousel-caption">
+                        <h3>{{ movieImage.title | uppercase }}</h3>
+                        <p>{{ movieImage.genre | uppercase }}</p>
+                    </div>
+                </ng-template>
+            </ng-container>
+            <ng-template #selectedTitle>
+                <ng-container *ngFor="let title of movieImage.imageStack">
+                    <ng-template ngbSlide>
+                        <div class="picsum-img-wrapper" (click)="gotoTitle(images)">
+                            <img [src]="title" alt="Random {{ idx+1 }} slide">
+                        </div>
+                        <div class="carousel-caption">
+                            <h3>{{ movieImage.title | uppercase }}</h3>
+                        </div>
+                    </ng-template>
+                </ng-container>
+            </ng-template>
+        </ng-container>
+    </ngb-carousel>
+</div>
+<ng-container *ngFor="let movie of images">
+    <ng-container *ngIf="images.length === 1">
+        <p>Genre: {{ movie.genre }}</p>
+        <p>Language: {{ movie.language }}</p>
+        <p>Actors:&nbsp;
+            <span *ngFor="let actors of movie.actor; let last = last">{{ actors }}
+                <span *ngIf="!last">,&nbsp;&nbsp;</span>
+            </span>
+        </p>
+        <p>Director: {{ movie.director }}</p>
+    </ng-container>
+</ng-container>
